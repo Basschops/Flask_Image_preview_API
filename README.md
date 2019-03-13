@@ -7,7 +7,7 @@ To ping the site and also to return system information.
 
 This application is available through Docker using the command
 
-    docker run -p 4000:80 dofarrell/pond5:part1
+    docker run -p 4000:80 dofarrell/pond5:part2
 
 To build and run the application locally use the following two commands
 
