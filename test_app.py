@@ -54,7 +54,7 @@ class TestApp(unittest.TestCase):
         release = platform.release()
         version = platform.uname().version
         architecture = platform.architecture()
-        processor = platform.machine()
+        machine = platform.machine()
 
         response = self.app.get('/system')
 
@@ -82,7 +82,7 @@ class TestApp(unittest.TestCase):
 
         self.assertEqual(
          json.loads(response.get_data()
-         .decode(sys.getdefaultencoding()))['processor'], processor)
+         .decode(sys.getdefaultencoding()))['machine'], machine)
 
 
 if __name__ == '__main__':
