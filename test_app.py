@@ -39,6 +39,19 @@ class TestApp(unittest.TestCase):
          "https://images.pond5.com/samuel-beckett-bridge-dublin-ireland-photo-011497188_iconl.jpeg")
 
         self.assertEqual(
+         int(json.loads(responseA.get_data().decode(sys.getdefaultencoding()))
+         ['size']), 25037)
+
+        self.assertEqual(
+         json.loads(responseA.get_data().decode(sys.getdefaultencoding()))
+         ['dimensions']['height'], 316)
+
+        self.assertEqual(
+         json.loads(responseA.get_data().decode(sys.getdefaultencoding()))
+         ['dimensions']['width'],
+          480)
+
+        self.assertEqual(
          json.loads(responseB.get_data().decode(sys.getdefaultencoding()))['name'],
           "Protest in Dublin, Ireland. Stock Photos")
 
@@ -54,7 +67,7 @@ class TestApp(unittest.TestCase):
         release = platform.release()
         version = platform.uname().version
         architecture = platform.architecture()
-        processor = platform.machine()
+        machine = platform.machine()
 
         response = self.app.get('/system')
 
@@ -82,7 +95,7 @@ class TestApp(unittest.TestCase):
 
         self.assertEqual(
          json.loads(response.get_data()
-         .decode(sys.getdefaultencoding()))['processor'], processor)
+         .decode(sys.getdefaultencoding()))['machine'], machine)
 
 
 if __name__ == '__main__':

@@ -6,6 +6,7 @@ from flask_restful import Resource, Api
 from flask_jsonpify import jsonify
 import os
 import platform
+from PIL import Image
 
 
 app = Flask(__name__)
@@ -44,10 +45,25 @@ class Media_info(Resource):
         except urllib.error.URLError as e:
             return e.reason
 
+        # Parse webpage and identify the image
         soup = BeautifulSoup(response, 'html.parser')
         icon = soup.find('img')
-        # Return alt as title and source of image
-        data = {'name': icon['alt'], 'source': icon['src']}
+
+        # Save name and source
+        img_src = icon['src']
+        img_name = icon['alt']
+
+        # Open image source and get dimensions and size
+        img_data = request.urlopen(icon['src'])
+        im = Image.open(img_data)
+        img_dimensions = {'width': im.size[0], 'height': im.size[1]}
+        img_size = img_data.info()["Content-Length"]
+
+        # Gather information to JSON object
+        data = {'name': img_name,
+                'source': img_src,
+                'dimensions':img_dimensions,
+                'size': img_size}
 
         return jsonify(data)
 
