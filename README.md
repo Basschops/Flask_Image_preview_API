@@ -9,7 +9,7 @@ This application is available through Docker using the command
 
     docker run -p 4000:80 dofarrell/pond5:part1
 
-To build and run the application locally use teh following two commands
+To build and run the application locally use the following two commands
 
     docker build --tag=image_preview .
 
@@ -26,7 +26,7 @@ When the application is running, the APIs can be accessed via the following rout
 
 
 
-Unit tests can be ran using the command
+Unit tests can be executed using the command
  
     python test_app.py
     
